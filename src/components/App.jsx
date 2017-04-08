@@ -4,10 +4,12 @@ class App extends React.Component {
 
     this.state = {
       currentVideo: {},
-      videoList: []
+      videoList: [],
+  
     };
 
     this.handleVideoClick = this.handleVideoClick.bind(this);
+    this.handleVideoSearch = this.handleVideoSearch.bind(this);
   }
 
   componentDidMount() {
@@ -18,6 +20,10 @@ class App extends React.Component {
     this.setState({
       currentVideo: video
     });
+  }
+
+  handleVideoSearch(videoName) {
+    this.getVideos(YOUTUBE_API_KEY, videoName, 5);
   }
 
   getVideos(key, query, max) {
@@ -60,7 +66,7 @@ class App extends React.Component {
   render() {
     return (
       <div>
-        <Nav />
+        <Nav handleVideoSearch={this.handleVideoSearch}/>
         <div className="col-md-7">
           <VideoPlayer video={this.state.currentVideo}/>
         </div>
