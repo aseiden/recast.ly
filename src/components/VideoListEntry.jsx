@@ -1,8 +1,16 @@
 var VideoListEntry = (props) => {
-  console.log(props.video.snippet.thumbnails.default.url);
+
+  console.log(props);
+
+  var handleClick = (video) => {
+    props.handleVideoClick(video);
+  };
 
   return (
-    <div className="video-list-entry">
+    <div 
+      className="video-list-entry"
+      onClick={() => handleClick(props.video)}
+    >
       <div className="media-left media-middle">
         <img className="media-object" src={props.video.snippet.thumbnails.default.url} alt="" />
       </div>
