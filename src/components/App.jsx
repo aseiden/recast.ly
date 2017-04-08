@@ -15,6 +15,7 @@ class App extends React.Component {
     });
   }
 
+  //The following code does not work because ES6 classes don't like arrow functions... ES7 does, though...
   // handleVideoClick = (video) => (
   //   this.setState({
   //     currentVideo: video;

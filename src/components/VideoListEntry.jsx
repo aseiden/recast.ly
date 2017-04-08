@@ -9,6 +9,7 @@ var VideoListEntry = (props) => {
   return (
     <div 
       className="video-list-entry"
+      // '() =>' needs to be added because as the JS interpreter runs down, it'll immediately call anything within {}. If we just had 'handleClick(props.video)', it'll immediately invoke that function forever... causing an infinite loop. Creating an anonymous function with '() =>' prevents this from happening
       onClick={() => handleClick(props.video)}
     >
       <div className="media-left media-middle">
