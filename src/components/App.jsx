@@ -3,15 +3,49 @@ class App extends React.Component {
     super(props);
 
     this.state = {
-      currentVideo: exampleVideoData[0],
+      currentVideo: {},
+      videoList: []
     };
 
     this.handleVideoClick = this.handleVideoClick.bind(this);
   }
 
+  componentDidMount() {
+    this.getInitialVideos(YOUTUBE_API_KEY, 'monster trucks', 5);
+  }
+
   handleVideoClick(video) {
     this.setState({
       currentVideo: video
+    });
+  }
+
+  getVideos(key, query, max) {
+    var that = this;
+
+    this.props.searchYouTube({
+      key: key,
+      query: query,
+      max: max
+    }, function(videos) {
+      that.setState({
+        videoList: videos,
+      });
+    });
+  }
+
+  getInitialVideos(key, query, max) {
+    var that = this;
+
+    this.props.searchYouTube({
+      key: key,
+      query: query,
+      max: max
+    }, function(videos) {
+      that.setState({
+        videoList: videos,
+        currentVideo: videos[0]
+      });
     });
   }
 
@@ -33,7 +67,7 @@ class App extends React.Component {
         <div className="col-md-5">
           <VideoList
             handleVideoClick={this.handleVideoClick}
-            videos={exampleVideoData}
+            videos={this.state.videoList}
           />
         </div>
       </div>
