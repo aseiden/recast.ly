@@ -1,18 +1,24 @@
 var searchYouTube = (options, callback) => {
   var dataInput = {
+    key: options.key,
+    q: options.query,
     part: 'snippet',
     type: 'video',
-    q: 'america',
     videoEmbeddable: true,
-    safeSearch: 'strict'
+    safeSearch: 'strict',
+    maxResults: options.max || 5
   };
+
+  console.log(dataInput);
 
   $.ajax({
     url: 'https://www.googleapis.com/youtube/v3/search',
     type: 'GET',
     data: JSON.stringify(dataInput),
-    contentType: 'application/JSON',
-    success: callback(),
+    contentType: 'application/json; charset=utf-8',
+    success: function (data) {
+      callback(data);
+    },
     error: console.log('you dun goofed')
   });
 };
