@@ -2,20 +2,22 @@ var Search = (props) => {
   
   var handleSearch = () => {
     var videoName = document.getElementsByClassName('form-control')[0].value;
-    // console.log('videoName', videoName);
     props.handleVideoSearch(videoName);
   };
+
+  //live search is cooler
+  var waitToSearch = _.debounce(handleSearch, 500);
 
   return (
     <div className="search-bar form-inline">
       <input 
         className="form-control" 
         type="text"
-        onChange={() => handleSearch()}
+        onChange={() => waitToSearch()}
          />
       <button 
         className="btn hidden-sm-down"
-        onClick={() => handleSearch()}
+        onClick={() => waitToSearch()}
       >
         <span className="glyphicon glyphicon-search"></span>
       </button>

@@ -36,6 +36,7 @@ class App extends React.Component {
     }, function(videos) {
       that.setState({
         videoList: videos,
+        currentVideo: videos[0]
       });
     });
   }
